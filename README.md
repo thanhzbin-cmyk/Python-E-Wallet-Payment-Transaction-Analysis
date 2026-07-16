@@ -29,3 +29,87 @@ This project analyzes payment and transaction data from an e-wallet platform usi
 - Analyze transaction volume
 - Analyze unique senders
 - Analyze unique receivers for each transaction type
+--------------
+# Exploratory Data Analysis #
+
+## 1. Data Preparation ##
+- Merge payment records with product information to create a unified dataset for subsequent analysis.
+<img width="1374" height="72" alt="image" src="https://github.com/user-attachments/assets/37c2e529-2d91-49bc-8792-3beef5d99ac5" />
+
+- Dataset preview
+  
+**Table: dfpayment_enriched**
+<img width="1332" height="342" alt="image" src="https://github.com/user-attachments/assets/ee1badca-f90b-4219-bf15-f0955d30f173" />
+
+**Table: dftransactions**
+<img width="1224" height="312" alt="image" src="https://github.com/user-attachments/assets/1124702b-7988-4a2e-9b1e-6c738c259f09" />
+
+## 2. Data Quality Assessment ##
+
+### 2.1 Structure Overview ###
+
+**Table: dfpayment_enriched**
+
+- dfpayment_enriched.info()
+
+| Check          | Result                                       | Action                             |
+| -------------- | -------------------------------------------- | ---------------------------------- |
+| Missing values | 22 missing rows in `category` and `team_own` | Investigate unmatched `product_id` |
+| Data type      | `report_month` stored as object              | Convert to datetime                |
+| Columns        | All expected columns available               | No action                          |
+
+- Investigate Missing Values
+
+The missing values originated from product IDs that could not be matched during the merge process. Further investigation was performed to determine whether inconsistent product IDs or missing master data caused the issue.
+
+**Table: dftransactions**
+- dftransactions.info()
+
+| Check          | Result                                                              | Action                                                                                    |
+| -------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Missing values | `sender_id`, `receiver_id`, and `extra_info` contain missing values | Investigate whether the missing values are expected business cases or data quality issues |
+| Data type      | `timeStamp` stored as Unix timestamp (`int64`)                      | Convert to `datetime`                                                                     |
+| Columns        | All expected columns available                                      | No action                                                                                 |
+
+-  Investigate Missing Values
+
+The missing values in sender_id and receiver_id were investigated to determine whether they were expected for specific transaction types or resulted from incomplete records. The extra_info column also contains a large number of missing values and requires validation to confirm whether it is an optional business field or missing data.
+
+- Convert Data Type
+The timeStamp column was converted from Unix timestamp (int64) to datetime format to support chronological analysis and time-based aggregations.
+
+### 2.2 Numerical Variables ###
+
+**Table: dfpayment_enriched**
+
+<img width="1158" height="432" alt="image" src="https://github.com/user-attachments/assets/580c7fef-8704-4920-a1bf-0fd2312b7b25" />
+
+- No missing values in volume
+- Minimum value is positive
+- Maximum value is substantially larger than Q3, indicating potential outliers
+- Mean exceeds median, suggesting a right-skewed distribution
+- High standard deviation indicates considerable variation in payment volume
+
+### 2.3 Categorical Variables ###
+
+**Table: dfpayment_enriched**
+dftransactions['transType'].value_counts()
+dftransactions['transStatus'].value_counts()
+dftransactions['sender_id'].value_counts()
+dftransactions['receiver_id'].value_counts()
+
+**Table: dftransactions**
+dftransactions['transType'].value_counts()
+dftransactions['transStatus'].value_counts()
+dftransactions['sender_id'].value_counts()
+dftransactions['receiver_id'].value_counts()
+
+### 2.4 Distribution Analysis ###
+
+**Table: dfpayment_enriched**
+<img width="2560" height="728" alt="image" src="https://github.com/user-attachments/assets/cf25dac0-7f7c-496a-bb53-5a956e211b34" />
+
+**Table: dftransactions**
+<img width="2558" height="724" alt="image" src="https://github.com/user-attachments/assets/c9912aa5-89f9-4f57-8598-e5297b8a93f7" />
+
+### 2.5 Data Validation ###
