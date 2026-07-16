@@ -58,10 +58,6 @@ This project analyzes payment and transaction data from an e-wallet platform usi
 | Data type      | `report_month` stored as object              | Convert to datetime                |
 | Columns        | All expected columns available               | No action                          |
 
-- Investigate Missing Values
-
-The missing values originated from product IDs that could not be matched during the merge process. Further investigation was performed to determine whether inconsistent product IDs or missing master data caused the issue.
-
 **Table: dftransactions**
 - dftransactions.info()
 
@@ -70,13 +66,6 @@ The missing values originated from product IDs that could not be matched during 
 | Missing values | `sender_id`, `receiver_id`, and `extra_info` contain missing values | Investigate whether the missing values are expected business cases or data quality issues |
 | Data type      | `timeStamp` stored as Unix timestamp (`int64`)                      | Convert to `datetime`                                                                     |
 | Columns        | All expected columns available                                      | No action                                                                                 |
-
--  Investigate Missing Values
-
-The missing values in sender_id and receiver_id were investigated to determine whether they were expected for specific transaction types or resulted from incomplete records. The extra_info column also contains a large number of missing values and requires validation to confirm whether it is an optional business field or missing data.
-
-- Convert Data Type
-The timeStamp column was converted from Unix timestamp (int64) to datetime format to support chronological analysis and time-based aggregations.
 
 ### 2.2 Numerical Variables ###
 
