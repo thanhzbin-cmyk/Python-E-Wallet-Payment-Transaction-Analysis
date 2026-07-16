@@ -129,14 +129,27 @@ dftransactions['receiver_id'].value_counts()
 <img width="2560" height="1022" alt="image" src="https://github.com/user-attachments/assets/d4035bcc-3718-4ddc-8a30-73e48cf2ba34" />
 
 **Table: dftransactions**
+<img width="2560" height="1062" alt="image" src="https://github.com/user-attachments/assets/cd7b43d5-aaf6-4165-be92-c72ba4c70d80" />
 
 --------------
 # Business Analysis #
 - Q1: Top 3 product_ids with the highest volume.
-- Q2.Given that 1 product_id is only owed by 1 team, are there any abnormal products against this rule?
+- 
+<img width="2560" height="602" alt="image" src="https://github.com/user-attachments/assets/6e0cbd98-73c8-4e81-80ce-7c570204fc8e" />
+
+- Q2.Given that 1 product_id is only owned by 1 team, are there any abnormal products against this rule?
+  
+<img width="2560" height="1440" alt="image" src="https://github.com/user-attachments/assets/82a21153-8e18-437a-80b2-7aa7c58e4e8c" />
+
 - Q3.Find the team has had the lowest performance (lowest volume) since Q2.2023. Find the category that contributes the least to that team.
-- Q4. Find the contribution of source_ids of refund transactions (payment_group = ‘refund’), what is the source_id with the highest contribution?
-- Q5. Define type of transactions (‘transaction_type’) for each row, given:
+- 
+<img width="2560" height="770" alt="image" src="https://github.com/user-attachments/assets/be633c18-63e0-4b41-b4be-435a560f39be" />
+
+- Q4. Find the contribution of source_ids of refund transactions (payment_group = ‘refund’); what is the source_id with the highest contribution?
+  
+<img width="2560" height="406" alt="image" src="https://github.com/user-attachments/assets/8b3eabda-8d4e-495d-8a10-a00b90585476" />
+
+- Q5. Define the type of transactions (‘transaction_type’) for each row, given:
 
 transType = 2 & merchant_id = 1205: Bank Transfer Transaction |
 transType = 2 & merchant_id = 2260: Withdraw Money Transaction |
@@ -146,4 +159,8 @@ transType = 8, merchant_id = 2250: Transfer Money Transaction |
 transType = 8 & others merchant_id: Split Bill Transaction |
 Remaining cases are invalid transactions
 
-- Q6.Of each transaction type (excluding invalid transactions): find the number of transactions, volume, senders and receivers.
+<img width="2560" height="1340" alt="image" src="https://github.com/user-attachments/assets/73d5af7e-bf88-41f3-bf88-0a3bad86165c" />
+
+- Q6.Of each transaction type (excluding invalid transactions): find the number of transactions, volume, senders, and receivers.
+- 
+<img width="2560" height="618" alt="image" src="https://github.com/user-attachments/assets/13b6589c-8df5-49f6-aae5-200ae5d76709" />
