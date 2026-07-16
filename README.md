@@ -73,11 +73,7 @@ This project analyzes payment and transaction data from an e-wallet platform usi
 
 <img width="1158" height="432" alt="image" src="https://github.com/user-attachments/assets/580c7fef-8704-4920-a1bf-0fd2312b7b25" />
 
-- No missing values in volume
-- Minimum value is positive
-- Maximum value is substantially larger than Q3, indicating potential outliers
-- Mean exceeds median, suggesting a right-skewed distribution
-- High standard deviation indicates considerable variation in payment volume
+**Table: dftransactions**
 
 ### 2.3 Categorical Variables ###
 
