@@ -73,7 +73,21 @@ This project analyzes payment and transaction data from an e-wallet platform usi
 
 <img width="1158" height="432" alt="image" src="https://github.com/user-attachments/assets/580c7fef-8704-4920-a1bf-0fd2312b7b25" />
 
+- No missing in volume (count = 919)
+- No obvious incorrect values (min > 0)
+- Potential outliers: max much larger than Q3
+- Distribution appears right-skewed (mean > median)
+- High variability based on std
+
 **Table: dftransactions**
+
+<img width="1276" height="432" alt="image" src="https://github.com/user-attachments/assets/304e277c-9941-447c-8237-266ea3f49770" />
+
+- Incorrect: receiver_id column has a negative value
+- volume column: Potential outlier
+- volume column: Distribution appears right-skewed (mean > median)
+- volume column: High variability based on std
+- volume column: data spread out
 
 ### 2.3 Categorical Variables ###
 
@@ -98,3 +112,38 @@ dftransactions['receiver_id'].value_counts()
 <img width="2558" height="724" alt="image" src="https://github.com/user-attachments/assets/c9912aa5-89f9-4f57-8598-e5297b8a93f7" />
 
 ### 2.5 Data Validation ###
+
+**Table: dfpayment_enriched**
+
+- All payment_group values are valid (payment or refund).
+- No duplicate records were detected.
+
+**Table: dftransactions**
+
+- Transaction-related fields contain valid values based on the business rules.
+- No duplicate records were detected.
+
+## 3. Data Summarization ##
+
+**Table: dfpayment_enriched**
+<img width="2560" height="1022" alt="image" src="https://github.com/user-attachments/assets/d4035bcc-3718-4ddc-8a30-73e48cf2ba34" />
+
+**Table: dftransactions**
+
+--------------
+# Business Analysis #
+- Q1: Top 3 product_ids with the highest volume.
+- Q2.Given that 1 product_id is only owed by 1 team, are there any abnormal products against this rule?
+- Q3.Find the team has had the lowest performance (lowest volume) since Q2.2023. Find the category that contributes the least to that team.
+- Q4. Find the contribution of source_ids of refund transactions (payment_group = ‘refund’), what is the source_id with the highest contribution?
+- Q5. Define type of transactions (‘transaction_type’) for each row, given:
+
+transType = 2 & merchant_id = 1205: Bank Transfer Transaction |
+transType = 2 & merchant_id = 2260: Withdraw Money Transaction |
+transType = 2 & merchant_id = 2270: Top Up Money Transaction |
+transType = 2 & others merchant_id: Payment Transaction |
+transType = 8, merchant_id = 2250: Transfer Money Transaction |
+transType = 8 & others merchant_id: Split Bill Transaction |
+Remaining cases are invalid transactions
+
+- Q6.Of each transaction type (excluding invalid transactions): find the number of transactions, volume, senders and receivers.
